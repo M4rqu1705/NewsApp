@@ -1,0 +1,156 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: Lato;
+    color: #1d3557;
+    background-color: #e5e5e5;
+
+}
+
+a.card{
+    width: 90%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 1rem;
+    margin: 1rem;
+    color: #1d3557;
+    background-color: #ffffff;
+    text-decoration: none;
+
+    border-left: 5px solid #fca311;
+    border-radius: 5px;
+
+    -webkit-box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.75);
+}
+
+a.card > img{
+    max-height: 15rem;
+    max-width: 15rem;
+    margin: 1rem;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+}
+
+a.card > div > h2.title{
+    font-size: 2rem;
+}
+a.card > div > p.subtitle{
+    text-overflow: ellipsis;
+    font-size: 1.25rem;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+#overlay > div{
+    overflow-y: scroll;
+    width: 90%;
+    height: 80%;
+    background-color: #eeeeee;
+    z-index: 2;
+    font-size: 2rem;
+
+    border-radius: 5px;
+    line-height: 4rem;
+
+    margin: 2rem;
+    padding: 3rem;
+}
+
+.overlay_title{
+    font-size: 3.5rem;
+    margin: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    line-height: 4rem;
+
+}
+.overlay_subtitle{
+    font-size: 2rem;
+    margin: 0;
+    margin-bottom: 2rem;
+    padding: 0;
+    line-height: 2.5rem;
+
+}
+.overlay_image{
+    width: 50%;
+    position: relative;
+    left: 25%;
+}
+.overlay_date{
+    margin: 0;
+    padding: 0;
+}
+
+#max_articles{
+    width: 5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.endi{
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+}
+.endi::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.2;
+    background-image: url(https://www.elnuevodia.com/pf/resources/dist/images/logo-endi_domain_2x_2017.png?d=47);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.vocero{
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+}
+.vocero::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.2;
+    background-image: url(https://bloximages.newyork1.vip.townnews.com/elvocero.com/content/tncms/custom/image/ebb7a5b0-72fc-11ea-8239-a3651fb650c6.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
