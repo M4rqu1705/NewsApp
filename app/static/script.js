@@ -2,7 +2,7 @@
 // Thank you https://scotch.io/tutorials/how-to-change-a-css-background-images-opacity
 
 
-var api_server = "http://127.0.0.1:5000";
+var api_server = "https://marcos-newsapp.herokuapp.com";
 var MAX_ARTICLES = 5;
 var overlay = document.getElementById("overlay");
 var max_articles_input = document.getElementById("max_articles");
