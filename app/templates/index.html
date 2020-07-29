@@ -6,15 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NewsApp</title>
     <script defer src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-    <h1>¿Cúantos artículos por periódico quiere ver?</h1>
-    <input type="number" name="max_articles" id="max_articles" oninput="update_max_articles()" value="5">
-    <div id="overlay" onclick="overlay_off()">
-        <div></div>
+    <div class="navbar">
+        <!-- <h1>¿Cúantos artículos por periódico quiere ver?</h1> -->
+        <input type="text" id="keyword_search" oninput="update_screen(false)" placeholder="keywords separados por `,`">
+        <input type="number" name="max_articles" id="max_articles" oninput="update_max_articles()" value="2">
+        <div class="dropdown">
+            <button onclick="dropdown_toggle(this)" class="dropbtn">Periódicos</button>
+            <div id="papersFilterDropdown" class="dropdown-content">
+                <input type="checkbox" id="endi_check" name="endi_check" value="endi" checked>
+                <label for="endi_check">El Nuevo Dia</label><br>
+                <input type="checkbox" id="vocero_check" name="vocero_check" value="vocero">
+                <label for="vocero_check">Vocero</label><br>
+                <input type="checkbox" id="primera_hora_check" name="primera_hora_check" value="primera_hora">
+                <label for="primera_hora_check">Primera Hora</label><br>
+                <input type="checkbox" id="metro_check" name="metro_check" value="metropr">
+                <label for="metro_check">Metro PR</label><br>
+                <input type="checkbox" id="claridad_check" name="claridad_check" value="claridad">
+                <label for="claridad_check">Claridad</label><br>
+            </div>
+        </div>
+    </div>
+    <div id="overlay">
+        <div>
+        </div>
     </div>
 
     <div id="container"></div>
