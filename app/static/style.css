@@ -36,6 +36,8 @@
     --color-buttons-margin: 0.25rem;
     --color-buttons-padding: 0.25rem;
     --color-buttons-border-size: 2px;
+
+    --footer-font-size: 1.5rem;
 }
 
 
@@ -68,11 +70,6 @@
     }
 }
 
-input[type="checkbox"]{
-    width: 1.25rem;
-    height: 1.25rem;
-}
-
 *{
     margin: 0;
     padding: 0;
@@ -90,6 +87,7 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-x: hidden;
 
     font-family: Lato;
     color: var(--main-color);
@@ -103,6 +101,17 @@ body{
             /*user-select: none;      /* Non-prefixed version, currently
                                        supported by Chrome, Edge, Opera and Firefox */
 
+}
+
+footer{
+    font-size: var(--footer-font-size);
+    margin: 1rem;
+    padding: 1rem;
+}
+
+input[type="checkbox"]{
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 #container{

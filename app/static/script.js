@@ -12,8 +12,6 @@ var api_server = "https://marcos-newsapp.herokuapp.com";
 var MAX_ARTICLES = max_articles_input.value;
 var previous_content;
 
-const available_colors = ["darkaquamarine", "coolmonochrome", "darkred", "ice-cream-cone", "fiery-earth", "bee", "darkblue", "cyanblue", "c1blue", "purple"]
-
 function overlay_on() {
     overlay.style.display = "flex";
     overlay.children[0].scrollTop = 0;
@@ -31,6 +29,7 @@ function overlay_toggle() {
     }
 }
 
+
 function dropdown_on(el) {
     el.nextElementSibling.classList.add('show');
 }
@@ -45,6 +44,7 @@ function dropdown_toggle(el) {
         dropdown_on(el);
     }
 }
+
 
 function color_down(el) {
     el.nextElementSibling.classList.add('show-colors');
@@ -162,13 +162,13 @@ function set_theme(color) {
     }
 }
 
+
 function update_max_articles() {
     MAX_ARTICLES = max_articles_input.value;
     if (MAX_ARTICLES !== '' && MAX_ARTICLES < 50) {
         update_screen();
     }
 }
-
 function update_screen(requestAgain = true) {
     container.innerHTML = "";
 
@@ -183,7 +183,7 @@ function update_screen(requestAgain = true) {
     }
 
     function add_articles(articles) {
-        let keywords = keywords_input.value.trim();
+        let keywords = keywords_input.value.toLowerCase().trim();
 
         if (keywords.includes(",")) {
             keywords = keywords.split(",");
@@ -236,7 +236,6 @@ function update_screen(requestAgain = true) {
         add_articles(previous_content);
     }
 }
-
 function insertCard(article, paper) {
 
     const title_el = document.createElement("h2");
