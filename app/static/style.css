@@ -12,6 +12,7 @@
     --overlay-font-size: 2rem;
     --overlay-margin: 2rem;
     --overlay-padding: 3rem;
+    --overlay-background: #eeeeee;
 
     --card-direction: row;
     --card-image-max-dim: 15rem;
@@ -22,7 +23,7 @@
     --navbar-align-items: start;
     --navbar-height: 5rem;
     --navbar-font-size: 1.5rem;
-    --navbar-color: #6d6875;
+    --navbar-color: #3f4f58;
     --max-articles-margin-bottom: auto;
 
     --dropdown-margin-sides: 3rem;
@@ -44,7 +45,7 @@
 
         --overlay-title-font-size: 2.0rem;
         --overlay-subtitle-font-size: 1.25rem;
-        --overlay-font-size: 1.25rem;
+        --overlay-font-size: 1rem;
         --overlay-margin: 1rem;
         --overlay-padding: 2rem;
 
@@ -155,9 +156,10 @@ a.card > div > p.subtitle{
 }
 #overlay > div{
     overflow-y: scroll;
+    overflow-x: hidden;
     width: 90%;
     height: 80%;
-    background-color: #eeeeee;
+    background-color: var(--overlay-background);
     z-index: 2;
     font-size: var(--overlay-font-size);
 
@@ -185,9 +187,10 @@ a.card > div > p.subtitle{
 
 }
 .overlay_image{
-    width: 50%;
+    max-width: 75%;
     position: relative;
-    left: 25%;
+    left: 12.5%;
+    font-size: 0.75rem;
 }
 .overlay_date{
     margin: 0;
@@ -195,8 +198,8 @@ a.card > div > p.subtitle{
 }
 .overlay_close{
     position: fixed;
-    top:7.5%;
-    left: 90%;
+    top:12.5%;
+    right: 7.5%;
     padding: 0;
     margin: 0;
     margin-bottom: 2rem;
@@ -216,7 +219,7 @@ a.card > div > p.subtitle{
     width: 100%; height: 100%;
     z-index: 0;
     opacity: var(--watermark-opacity);
-    background-image: url(https://www.elnuevodia.com/pf/resources/dist/images/logo-endi_domain_2x_2017.png?d=47);
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/El_Nuevo_D%C3%ADa_%282019-11-01%29.svg/1200px-El_Nuevo_D%C3%ADa_%282019-11-01%29.svg.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 15rem;
@@ -241,25 +244,6 @@ a.card > div > p.subtitle{
     background-size: 15rem;
 }
 
-.metropr{
-    position: relative;
-    background: var(--main-bg-color);
-    overflow: hidden;
-}
-.metropr::before{
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    opacity: var(--watermark-opacity);
-    background-image: url(https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Metro_International_logo.svg/1200px-Metro_International_logo.svg.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 15rem;
-}
-
 .primera_hora{
     position: relative;
     background: var(--main-bg-color);
@@ -274,6 +258,25 @@ a.card > div > p.subtitle{
     z-index: 0;
     opacity: var(--watermark-opacity);
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/66/Primera_Hora_logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15rem;
+}
+
+.metropr{
+    position: relative;
+    background: var(--main-bg-color);
+    overflow: hidden;
+}
+.metropr::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: var(--watermark-opacity);
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Metro_International_Logo.svg/1200px-Metro_International_Logo.svg.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 15rem;
@@ -306,7 +309,7 @@ a.card > div > p.subtitle{
     font-size: var(--navbar-font-size);
     max-height: var(--navbar-height);
     width: 100%;
-    background-color: var(--main-bg-color);
+    background-color: var(--navbar-color);
     /* overflow: auto; */
     display: var(--navbar-display);
     flex-direction: var(--navbar-direction);
@@ -381,19 +384,26 @@ a.card > div > p.subtitle{
     border-radius: 5px;
     cursor: pointer;
 }
+.dropbtn:focus, .dropbtn:active {
+    border: none;
+    outline: 0;
+    -moz-outline: 0;
+    -ms-outline:0;
+    -o-outline: 0;
+    -webkit-outline: 0;
+}
 .dropdown-content {
     /* opacity: 0; */
     display: none;
     position: absolute;
-    top: 4.5rem;
+    top: 3.5rem;
     background-color: var(--alternate-bg-color);
     min-width: 15rem;
     padding: 1rem;
     margin: 0;
 
     z-index: 3;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
     -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
     -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
     box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
