@@ -13,9 +13,25 @@
 
 <body>
     <div class="navbar">
-        <!-- <h1>¿Cúantos artículos por periódico quiere ver?</h1> -->
+        <div class="color-dropdown">
+            <button onclick="color_toggle(this)" class="color-dropbtn">ꜜ</button>
+            <div id="colorsDropDown" class="color-dropdown-content">
+                <button onclick="set_theme('darkaquamarine')" id="darkaquamarine-color"></button>
+                <button onclick="set_theme('coolmonochrome')" id="coolmonochrome-color"></button>
+                <button onclick="set_theme('darkred')" id="darkred-color"></button>
+                <button onclick="set_theme('ice-cream-cone')" id="ice-cream-cone-color"></button>
+                <button onclick="set_theme('fiery-earth')" id="fiery-earth-color"></button>
+                <button onclick="set_theme('bee')" id="bee-color"></button>
+                <button onclick="set_theme('darkblue')" id="darkblue-color"></button>
+                <button onclick="set_theme('cyanblue')" id="cyanblue-color"></button>
+                <button onclick="set_theme('c1blue')" id="c1blue-color"></button>
+                <button onclick="set_theme('purple')" id="purple-color"></button>
+            </div>
+        </div>
+
         <input type="text" id="keyword_search" oninput="update_screen(false)" placeholder="keywords separados por `,`">
         <input type="number" name="max_articles" id="max_articles" oninput="update_max_articles()" value="2">
+
         <div class="dropdown">
             <button onclick="dropdown_toggle(this)" class="dropbtn">Periódicos</button>
             <div id="papersFilterDropdown" class="dropdown-content">
@@ -31,7 +47,9 @@
                 <label for="claridad_check">Claridad</label><br>
             </div>
         </div>
+
     </div>
+
     <div id="overlay">
         <div>
         </div>
