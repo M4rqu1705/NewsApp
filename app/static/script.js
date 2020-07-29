@@ -6,8 +6,8 @@ var overlay = document.getElementById("overlay");
 var max_articles_input = document.getElementById("max_articles");
 var keywords_input = document.getElementById("keyword_search")
 var container = document.getElementById("container");
-// var api_server = "https://marcos-newsapp.herokuapp.com";
-var api_server = "http://127.0.0.1:5000";
+var api_server = "https://marcos-newsapp.herokuapp.com";
+// var api_server = "http://127.0.0.1:5000";
 var MAX_ARTICLES = max_articles_input.value;
 var previous_content;
 
