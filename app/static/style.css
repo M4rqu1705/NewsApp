@@ -1,8 +1,10 @@
 :root{
-    --main-bg-color: #ffffff;
-    --alternate-bg-color: #e5e5e5;
-    --main-color: #1d3557;
-    --accent-color: #fca311;
+    --main-bg-color: #e0fbfc;
+    --alternate-bg-color: #98c1d9;
+    --main-color: #293241;
+    --accent-color: #ee6c4d;
+    --overlay-background: #98c1d9;
+    --navbar-color: #3d5a80;
 
     --title-font-size: 2rem;
     --subtitle-font-size: 1.25rem;
@@ -12,7 +14,6 @@
     --overlay-font-size: 2rem;
     --overlay-margin: 2rem;
     --overlay-padding: 3rem;
-    --overlay-background: #eeeeee;
 
     --card-direction: row;
     --card-image-max-dim: 15rem;
@@ -23,7 +24,6 @@
     --navbar-align-items: start;
     --navbar-height: 5rem;
     --navbar-font-size: 1.5rem;
-    --navbar-color: #3f4f58;
     --max-articles-margin-bottom: auto;
 
     --dropdown-margin-sides: 3rem;
@@ -35,11 +35,6 @@
 /* ##Device = Low Resolution Tablets, Mobiles */
 @media (max-width: 650px) {
     :root{
-        --main-bg-color: #ffffff;
-        --alternate-bg-color: #e5e5e5;
-        --main-color: #1d3557;
-        --accent-color: #fca311;
-
         --title-font-size: 1.5rem;
         --subtitle-font-size: 1.25rem;
 
