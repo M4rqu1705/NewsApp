@@ -1,10 +1,10 @@
-#navbar {
+#menu {
     position: fixed;
     top: 0px;
-    font-size: var(--navbar-font-size);
+    font-size: var(--menu-font-size);
     min-height: 100%;
     width: 0;
-    background-color: var(--navbar-color);
+    background-color: var(--menu-color);
     overflow-x: hidden;
 
     /* box-sizing: border-box; */
@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: var(--navbar-content-alignment);
+    align-items: var(--menu-content-alignment);
     z-index: 1;
     padding: 0rem;
     padding-top: 7.5rem;
@@ -20,8 +20,8 @@
     transition: width 0.4s;
 }
 
-#navbar > * {
-    font-size: var(--navbar-font-size);
+#menu > * {
+    font-size: var(--menu-font-size);
     padding: .75rem;
     color: var(--main-color);
     text-decoration: none;
@@ -29,43 +29,43 @@
     /* margin: auto; */
 }
 
-#navbar__max-articles{
+#menu__max-articles{
     width: 5rem;
     text-align: center;
     border: none;
     border-radius: 5px;
-    font-size: var(--navbar-font-size);
-    margin: var(--navbar-space-around);
+    font-size: var(--menu-font-size);
+    margin: var(--menu-space-around);
     padding: .75rem;
     -webkit-box-shadow: 0px 0px 2px 2px var(--accent-color);
     -moz-box-shadow: 0px 0px 2px 2px var(--accent-color);
     box-shadow: 0px 0px 2px 2px var(--accent-color);
 
 }
-#navbar__max-articles:focus{
+#menu__max-articles:focus{
     border:none;
     -webkit-box-shadow: 0px 0px 5px 5px var(--accent-color);
     -moz-box-shadow: 0px 0px 5px 5px var(--accent-color);
     box-shadow: 0px 0px 5px 5px var(--accent-color);
 }
 
-#navbar__keyword-search{
+#menu__keyword-search{
     width: min(100%, 20rem);
     border: none;
     border-radius: 5px;
-    font-size: calc(var(--navbar-font-size) * 4 / 5);
+    font-size: calc(var(--menu-font-size) * 4 / 5);
     text-align: center;
-    margin: var(--navbar-space-around);
+    margin: var(--menu-space-around);
     -webkit-box-shadow: 0px 0px 2px 2px var(--accent-color);
     -moz-box-shadow: 0px 0px 2px 2px var(--accent-color);
     box-shadow: 0px 0px 2px 2px var(--accent-color);
 }
 
-#navbar__search {
-    font-size: var(--navbar-font-size);
+#menu__search {
+    font-size: var(--menu-font-size);
     background-color: var(--accent-color);
     color: var(--main-bg-color);
-    margin: var(--navbar-space-around);
+    margin: var(--menu-space-around);
     padding: .75rem;
     border: none;
     border-radius: 5px;
@@ -73,16 +73,18 @@
     width: 90%;
 }
 
-#navbar__open-button {
+#menu__open-button {
     padding: 1rem;
     margin: 1rem;
     background: none;
     font-size: 2rem;
+    width: 5rem;
+    height: 5rem;
     color: var(--main-color);
 
     transition: color 0.4s;
 
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 2;

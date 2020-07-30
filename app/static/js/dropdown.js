@@ -27,3 +27,17 @@ function color_toggle(el) {
         color_down(el);
     }
 }
+
+
+function close_all_dropdowns() {
+    const temp = document.getElementsByClassName('dropdown-content');
+    const l0 = temp.length;
+    for (let i = 0; i < l0; i++) {
+        if (temp[i].classList.contains("show-papers")) {
+            temp[i].classList.remove("show-papers");
+        }
+        else if (temp[i].classList.contains("show-colors")) {
+            temp[i].classList.remove("show-colors");
+        }
+    }
+}

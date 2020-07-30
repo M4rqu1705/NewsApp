@@ -51,7 +51,7 @@ function update_screen(requestAgain = true) {
     // Prepare which news papers to filter for
     let papers = [];
 
-    const temp = document.getElementById("navbar__papers-filter-dropdown__dropdown-content").children;
+    const temp = document.getElementById("menu__papers-filter-dropdown__dropdown-content").children;
     for (let i = 0, l0 = temp.length; i < l0; i++) {
         if (temp[i].tagName === "INPUT" && temp[i].checked) {
             papers.push(temp[i].value);
@@ -107,16 +107,7 @@ function insertCard(article, paper) {
     card.addEventListener("click", function (e) {
 
         // Hide any open dropdown menus
-        const temp = document.getElementsByClassName('dropdown-content');
-        const l0 = temp.length;
-        for (let i = 0; i < l0; i++) {
-            if (temp[i].classList.contains("show-papers")) {
-                temp[i].classList.remove("show-papers");
-            }
-            else if (temp[i].classList.contains("show-colors")) {
-                temp[i].classList.remove("show-colors");
-            }
-        }
+        close_all_dropdowns();
 
         // Hide menu
         menu_off();

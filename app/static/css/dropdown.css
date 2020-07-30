@@ -1,7 +1,7 @@
- #navbar__color-dropdown {
+ #menu__color-dropdown {
     max-width: 5rem;
     background: none;
-    margin: var(--navbar-space-around);
+    margin: var(--menu-space-around);
     padding: 0;
     position: relative;
 
@@ -11,8 +11,8 @@
     align-items: center;
 }
 
-#navbar__color-dropdown__dropdown-button {
-    font-size: var(--navbar-font-size);
+#menu__color-dropdown__dropdown-button {
+    font-size: var(--menu-font-size);
     background-color: var(--accent-color);
     color: var(--main-bg-color);
     margin: 0;
@@ -22,8 +22,8 @@
     cursor: pointer;
 }
 
-#navbar__color-dropdown__dropdown-button:focus,
- #navbar__color-dropdown__dropdown-button:active {
+#menu__color-dropdown__dropdown-button:focus,
+ #menu__color-dropdown__dropdown-button:active {
     border: none;
     outline: 0;
     -moz-outline: 0;
@@ -32,7 +32,7 @@
     -webkit-outline: 0;
 }
 
-#navbar__color-dropdown__dropdown-content {
+#menu__color-dropdown__dropdown-content {
     /* opacity: 0; */
     display: none;
     position: absolute;
@@ -54,8 +54,8 @@
     box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
 }
 
-#navbar__color-dropdown__dropdown-content > button:focus,
-#navbar__color-dropdown__dropdown-content > button:active {
+#menu__color-dropdown__dropdown-content > button:focus,
+#menu__color-dropdown__dropdown-content > button:active {
     border: none;
     outline: 0;
     -moz-outline: 0;
@@ -70,20 +70,20 @@
 
 /* PAPERS -- PAPERS -- PAPERS -- PAPERS -- PAPERS -- PAPERS -- PAPERS -- PAPERS */
 
-#navbar__papers-filter-dropdown {
+#menu__papers-filter-dropdown {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     background: none;
-    margin: var(--navbar-space-around);
+    margin: var(--menu-space-around);
     margin-bottom: 1rem;
     padding: 0;
 }
 
-#navbar__papers-filter-dropdown__dropdown-button {
-    font-size: var(--navbar-font-size);
+#menu__papers-filter-dropdown__dropdown-button {
+    font-size: var(--menu-font-size);
     background-color: var(--accent-color);
     color: var(--main-bg-color);
     margin: 0;
@@ -93,7 +93,7 @@
     cursor: pointer;
 }
 
-#navbar__papers-filter-dropdown__dropdown-content {
+#menu__papers-filter-dropdown__dropdown-content {
     /* opacity: 0; */
     display: none;
     position: absolute;

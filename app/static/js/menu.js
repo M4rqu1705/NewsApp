@@ -1,12 +1,12 @@
 function menu_on() {
-    menu.style.width = getComputedStyle(root).getPropertyValue("--navbar-width");
-    document.getElementById("navbar__open-button").style.color = getComputedStyle(root).getPropertyValue("--main-bg-color");
+    menu.style.width = getComputedStyle(root).getPropertyValue("--menu-width");
+    document.getElementById("menu__open-button").style.color = getComputedStyle(root).getPropertyValue("--main-bg-color");
 }
 
 function menu_off() {
     menu.style.width = 0;
-    document.getElementById("navbar__open-button").style.color = getComputedStyle(root).getPropertyValue("--main-color");
-    // menu.style.padding = 0;
+    document.getElementById("menu__open-button").style.color = getComputedStyle(root).getPropertyValue("--main-color");
+    close_all_dropdowns();
 }
 
 function toggle_menu() {

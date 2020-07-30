@@ -13,19 +13,19 @@
     <link rel="stylesheet" href="/static/css/card.css">
     <link rel="stylesheet" href="/static/css/overlay.css">
     <link rel="stylesheet" href="/static/css/watermarks.css">
-    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/menu.css">
     <link rel="stylesheet" href="/static/css/themes.css">
     <link rel="stylesheet" href="/static/css/dropdown.css">
 </head>
 
 <body>
-    <div id="navbar">
+    <div id="menu">
 
-        <div id="navbar__color-dropdown">
-            <button onclick="color_toggle(this)" id="navbar__color-dropdown__dropdown-button">
+        <div id="menu__color-dropdown">
+            <button onclick="color_toggle(this)" id="menu__color-dropdown__dropdown-button">
                 <i class="fa fa-fw fa-angle-down"></i>
             </button>
-            <div id="navbar__color-dropdown__dropdown-content" class="dropdown-content">
+            <div id="menu__color-dropdown__dropdown-content" class="dropdown-content">
                 <button onclick="set_theme('darkaquamarine')" id="darkaquamarine-color"></button>
                 <button onclick="set_theme('coolmonochrome')" id="coolmonochrome-color"></button>
                 <button onclick="set_theme('darkred')" id="darkred-color"></button>
@@ -39,18 +39,16 @@
             </div>
         </div>
 
-
-        <input type="text" id="navbar__keyword-search" oninput="update_screen(false)"
+        <input type="text" id="menu__keyword-search" oninput="update_screen(false)"
             placeholder="keywords separados por `,`">
 
 
-        <input type="number" id="navbar__max-articles" oninput="update_max_articles()" value="2">
+        <input type="number" id="menu__max-articles" oninput="update_max_articles()" value="2">
 
-
-        <div id="navbar__papers-filter-dropdown">
+        <div id="menu__papers-filter-dropdown">
             <button onclick="dropdown_toggle(this)"
-                id="navbar__papers-filter-dropdown__dropdown-button">Periódicos</button>
-            <div id="navbar__papers-filter-dropdown__dropdown-content" class="dropdown-content">
+                id="menu__papers-filter-dropdown__dropdown-button">Periódicos</button>
+            <div id="menu__papers-filter-dropdown__dropdown-content" class="dropdown-content">
 
                 <input type="checkbox" id="endi_check" name="endi_check" value="endi" checked>
                 <label for="endi_check">El Nuevo Dia</label><br>
@@ -69,12 +67,12 @@
             </div>
         </div>
 
-        <button id="navbar__search" onclick="update_screen()">
+        <button id="menu__search" onclick="update_screen(); menu_off();">
             <i class="fa fa-fw fa-search"></i>
         </button>
 
     </div>
-    <button id="navbar__open-button" onclick="toggle_menu()">&#9776;</button>
+    <button id="menu__open-button" onclick="toggle_menu()">&#9776;</button>
 
 
     <div id="overlay">
@@ -85,7 +83,7 @@
     <div id="news-articles"></div>
 
 
-    <footer>Copyright 2020, M4rqu1705</footer>
+    <!-- <footer>Copyright 2020, M4rqu1705</footer> -->
 
     <!-- SCRIPT -- SCRIPT -- SCRIPT -- SCRIPT -- SCRIPT -->
     <script src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>

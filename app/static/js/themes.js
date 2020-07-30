@@ -23,7 +23,7 @@ function set_theme(color) {
             // root.style.setProperty("--main-color",);
             // root.style.setProperty("--accent-color",);
             // root.style.setProperty("--overlay-background",);
-            // root.style.setProperty("--navbar-color",);
+            // root.style.setProperty("--menu-color",);
 
             case "default":
                 root.style.setProperty("--main-bg-color", "#ffffff");
@@ -31,7 +31,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#000000");
                 root.style.setProperty("--accent-color", "#fca311");
                 root.style.setProperty("--overlay-background", "#ffffff");
-                root.style.setProperty("--navbar-color", "#14213d");
+                root.style.setProperty("--menu-color", "#14213d");
                 break;
 
             case "darkaquamarine":
@@ -40,7 +40,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#353535");
                 root.style.setProperty("--accent-color", "#284b63");
                 root.style.setProperty("--overlay-background", "#ffffff");
-                root.style.setProperty("--navbar-color", "#3c6e71");
+                root.style.setProperty("--menu-color", "#3c6e71");
                 break;
 
             case "coolmonochrome":
@@ -49,7 +49,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#253237");
                 root.style.setProperty("--accent-color", "#5c6b73");
                 root.style.setProperty("--overlay-background", "#e0fbfc");
-                root.style.setProperty("--navbar-color", "#9db4c0");
+                root.style.setProperty("--menu-color", "#9db4c0");
                 break;
 
             case "darkred":
@@ -58,7 +58,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#283d3b");
                 root.style.setProperty("--accent-color", "#c44536");
                 root.style.setProperty("--overlay-background", "#edddd4");
-                root.style.setProperty("--navbar-color", "#772e25");
+                root.style.setProperty("--menu-color", "#772e25");
                 break;
 
             case "ice-cream-cone":
@@ -67,7 +67,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#555b6e");
                 root.style.setProperty("--accent-color", "#89b0ae");
                 root.style.setProperty("--overlay-background", "#faf9f9");
-                root.style.setProperty("--navbar-color", "#bee3db");
+                root.style.setProperty("--menu-color", "#bee3db");
                 break;
 
             case "fiery-earth":
@@ -76,7 +76,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#252422");
                 root.style.setProperty("--accent-color", "#eb5e28");
                 root.style.setProperty("--overlay-background", "#fffcf2");
-                root.style.setProperty("--navbar-color", "#403d39");
+                root.style.setProperty("--menu-color", "#403d39");
                 break;
 
             case "bee":
@@ -85,7 +85,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#242423");
                 root.style.setProperty("--accent-color", "#f5cb5c");
                 root.style.setProperty("--overlay-background", "#e8eddf");
-                root.style.setProperty("--navbar-color", "#333533");
+                root.style.setProperty("--menu-color", "#333533");
                 break;
 
             case "darkblue":
@@ -94,7 +94,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#0d1b2a");
                 root.style.setProperty("--accent-color", "#1b263b");
                 root.style.setProperty("--overlay-background", "#e0e1dd");
-                root.style.setProperty("--navbar-color", "#415a77");
+                root.style.setProperty("--menu-color", "#415a77");
                 break;
             case "cyanblue":
                 root.style.setProperty("--main-bg-color", "#caf0f8");
@@ -102,7 +102,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#03045e");
                 root.style.setProperty("--accent-color", "#00b4d8");
                 root.style.setProperty("--overlay-background", "#caf0f8");
-                root.style.setProperty("--navbar-color", "#0077b6");
+                root.style.setProperty("--menu-color", "#0077b6");
                 break;
             case "c1blue":
                 root.style.setProperty("--main-bg-color", "#e0fbfc");
@@ -110,7 +110,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#293241");
                 root.style.setProperty("--accent-color", "#ee6c4d");
                 root.style.setProperty("--overlay-background", "#e0fbfc");
-                root.style.setProperty("--navbar-color", "#3d5a80");
+                root.style.setProperty("--menu-color", "#3d5a80");
                 break;
             case "purple":
                 root.style.setProperty("--main-bg-color", "#f3e9d2");
@@ -118,7 +118,7 @@ function set_theme(color) {
                 root.style.setProperty("--main-color", "#22223b");
                 root.style.setProperty("--accent-color", "#4a4e69");
                 root.style.setProperty("--overlay-background", "#f3e9d2");
-                root.style.setProperty("--navbar-color", "#9a8c98");
+                root.style.setProperty("--menu-color", "#9a8c98");
 
                 break;
 

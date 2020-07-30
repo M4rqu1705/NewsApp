@@ -4,7 +4,7 @@
     --main-color: #000000;
     --accent-color: #fca311;
     --overlay-background: #ffffff;
-    --navbar-color: #14213d;
+    --menu-color: #14213d;
 
     --title-font-size: 2rem;
     --subtitle-font-size: 1.25rem;
@@ -24,12 +24,13 @@
     --card-image-dim: 15rem;
     --card-image-margin: 1rem;
     --card-padding: 1rem;
+    --card-padding-multiplier: 1;
     --card-margin: 1rem;
 
-    --navbar-content-alignment: flex-start;
-    --navbar-space-around: 1rem;
-    --navbar-width: 25rem;
-    --navbar-font-size: 1.5rem;
+    --menu-content-alignment: flex-start;
+    --menu-space-around: 1rem;
+    --menu-width: 25rem;
+    --menu-font-size: 1.5rem;
     --max-articles-margin-bottom: auto;
     --papers-filter-dropdown-content__left-shift: 10%;
 
@@ -62,10 +63,11 @@
 
         --card-direction: column;
         --card-image-max-dim: 90%;
+        --card-padding-multiplier: 2;
 
-        --navbar-content-alignment: center;
-        --navbar-width: 100vw;
-        --navbar-font-size: 1.25rem;
+        --menu-content-alignment: center;
+        --menu-width: 100vw;
+        --menu-font-size: 1.25rem;
         --max-articles-margin-bottom: 2rem;
         --papers-filter-dropdown-content__left-shift: 0;
 

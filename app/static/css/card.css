@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+
+    padding-top: 7rem;
 }
 
 div.card {
@@ -13,7 +15,7 @@ div.card {
 
     width: 90vw;
 
-    padding: var(--card-padding);
+    padding: calc(var(--card-padding) * var(--card-padding-multiplier)) var(--card-padding);
     margin: var(--card-margin);
 
     color: var(--main-color);
