@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewsApp</title>
-    <script defer src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>
+    <title>Marcos - NewsApp</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/static/css/variables.css">
@@ -15,14 +15,17 @@
     <link rel="stylesheet" href="/static/css/watermarks.css">
     <link rel="stylesheet" href="/static/css/navbar.css">
     <link rel="stylesheet" href="/static/css/themes.css">
-    <link rel="stylesheet" href="/static/css/dropdowns.css">
+    <link rel="stylesheet" href="/static/css/dropdown.css">
 </head>
 
 <body>
-    <div class="navbar">
-        <div class="color-dropdown">
-            <button onclick="color_toggle(this)" class="color-dropbtn">ꜜ</button>
-            <div id="colorsDropDown" class="color-dropdown-content">
+    <div id="navbar">
+
+        <div id="navbar__color-dropdown">
+            <button onclick="color_toggle(this)" id="navbar__color-dropdown__dropdown-button">
+                <i class="fa fa-fw fa-angle-down"></i>
+            </button>
+            <div id="navbar__color-dropdown__dropdown-content" class="dropdown-content">
                 <button onclick="set_theme('darkaquamarine')" id="darkaquamarine-color"></button>
                 <button onclick="set_theme('coolmonochrome')" id="coolmonochrome-color"></button>
                 <button onclick="set_theme('darkred')" id="darkred-color"></button>
@@ -36,37 +39,59 @@
             </div>
         </div>
 
-        <input type="text" id="keyword_search" oninput="update_screen(false)" placeholder="keywords separados por `,`">
-        <input type="number" name="max_articles" id="max_articles" oninput="update_max_articles()" value="2">
 
-        <div class="dropdown">
-            <button onclick="dropdown_toggle(this)" class="dropbtn">Periódicos</button>
-            <div id="papersFilterDropdown" class="dropdown-content">
+        <input type="text" id="navbar__keyword-search" oninput="update_screen(false)"
+            placeholder="keywords separados por `,`">
+
+
+        <input type="number" id="navbar__max-articles" oninput="update_max_articles()" value="2">
+
+
+        <div id="navbar__papers-filter-dropdown">
+            <button onclick="dropdown_toggle(this)"
+                id="navbar__papers-filter-dropdown__dropdown-button">Periódicos</button>
+            <div id="navbar__papers-filter-dropdown__dropdown-content" class="dropdown-content">
+
                 <input type="checkbox" id="endi_check" name="endi_check" value="endi" checked>
                 <label for="endi_check">El Nuevo Dia</label><br>
-                <input type="checkbox" id="vocero_check" name="vocero_check" value="vocero" checked>
+
+                <input type="checkbox" id="vocero_check" name="vocero_check" value="vocero">
                 <label for="vocero_check">Vocero</label><br>
-                <input type="checkbox" id="primera_hora_check" name="primera_hora_check" value="primera_hora" checked>
+
+                <input type="checkbox" id="primera_hora_check" name="primera_hora_check" value="primera_hora">
                 <label for="primera_hora_check">Primera Hora</label><br>
+
                 <input type="checkbox" id="metro_check" name="metro_check" value="metropr">
                 <label for="metro_check">Metro PR</label><br>
+
                 <input type="checkbox" id="claridad_check" name="claridad_check" value="claridad">
                 <label for="claridad_check">Claridad</label><br>
             </div>
         </div>
 
+        <button id="navbar__search" onclick="update_screen()">
+            <i class="fa fa-fw fa-search"></i>
+        </button>
+
     </div>
+    <button id="navbar__open-button" onclick="toggle_menu()">&#9776;</button>
+
 
     <div id="overlay">
-        <div>
-        </div>
+        <div id="overlay__news-article"></div>
     </div>
 
-    <div id="container"></div>
 
-    <footer>Copyright 2020, Marcos Pesante</footer>
+    <div id="news-articles"></div>
+
+
+    <footer>Copyright 2020, M4rqu1705</footer>
+
+    <!-- SCRIPT -- SCRIPT -- SCRIPT -- SCRIPT -- SCRIPT -->
+    <script src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>
     <script src="/static/js/globals.js"></script>
     <script src="/static/js/overlay.js"></script>
+    <script src="/static/js/menu.js"></script>
     <script src="/static/js/dropdown.js"></script>
     <script src="/static/js/themes.js"></script>
     <script src="/static/js/script.js"></script>

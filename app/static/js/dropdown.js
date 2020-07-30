@@ -1,14 +1,13 @@
 function dropdown_on(el) {
-    el.nextElementSibling.classList.add('show');
+    el.nextElementSibling.classList.add('show-papers');
 }
 
 function dropdown_off(el) {
-    el.nextElementSibling.classList.remove('show');
-    update_screen();
+    el.nextElementSibling.classList.remove('show-papers');
 }
 
 function dropdown_toggle(el) {
-    if (el.nextElementSibling.classList.contains('show')) {
+    if (el.nextElementSibling.classList.contains('show-papers')) {
         dropdown_off(el);
     } else {
         dropdown_on(el);

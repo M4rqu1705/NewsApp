@@ -8,36 +8,44 @@
 
     --title-font-size: 2rem;
     --subtitle-font-size: 1.25rem;
+    --border-radius: 5px;
 
-    --overlay-title-font-size: 3.5rem;
-    --overlay-subtitle-font-size: 2rem;
-    --overlay-font-size: 2rem;
+    --overlay-title-font-size: 3rem;
+    --overlay-subtitle-font-size: 1.5rem;
+    --overlay-font-size: 1.5rem;
     --overlay-margin: 2rem;
     --overlay-padding: 2rem;
+    --close-button-size: 2rem;
+
+    --article-width: 95vw;
+    --article-height: 95vh;
 
     --card-direction: row;
-    --card-image-max-dim: 15rem;
+    --card-image-dim: 15rem;
+    --card-image-margin: 1rem;
+    --card-padding: 1rem;
+    --card-margin: 1rem;
 
-    --navbar-display: flex;
-    --navbar-direction: row;
-    --navbar-justify-content: flex-start;
-    --navbar-align-items: start;
-    --navbar-height: 5rem;
+    --navbar-content-alignment: flex-start;
+    --navbar-space-around: 1rem;
+    --navbar-width: 25rem;
     --navbar-font-size: 1.5rem;
     --max-articles-margin-bottom: auto;
+    --papers-filter-dropdown-content__left-shift: 10%;
 
-    --dropdown-margin-sides: 3rem;
+    --dropdown-margin-sides: 0rem;
 
     --color-dropdown-content-left-margin: 1rem;
 
     --watermark-opacity: 0.16;
+    --watermark-size: 15rem;
 
     --color-buttons-size: 1rem;
     --color-buttons-margin: 0.25rem;
     --color-buttons-padding: 0.25rem;
     --color-buttons-border-size: 2px;
 
-    --footer-font-size: 1.5rem;
+    --footer-font-size: 1rem;
 }
 
 @media (max-width: 650px) {
@@ -49,18 +57,17 @@
         --overlay-subtitle-font-size: 1.25rem;
         --overlay-font-size: 1rem;
         --overlay-margin: 1rem;
-        --overlay-padding: 1.5rem;
+        --overlay-padding: 0.75rem;
+        --close-button-size: 1.30rem;
 
         --card-direction: column;
         --card-image-max-dim: 90%;
 
-        --navbar-display: flex;
-        --navbar-direction: column;
-        --navbar-justify-content: center;
-        --navbar-align-items: center;
-        --navbar-height: auto;
+        --navbar-content-alignment: center;
+        --navbar-width: 100vw;
         --navbar-font-size: 1.25rem;
         --max-articles-margin-bottom: 2rem;
+        --papers-filter-dropdown-content__left-shift: 0;
 
         --dropdown-margin-sides: 0;
 

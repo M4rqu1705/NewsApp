@@ -14,7 +14,7 @@
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/El_Nuevo_D%C3%ADa_%282019-11-01%29.svg/1200px-El_Nuevo_D%C3%ADa_%282019-11-01%29.svg.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 15rem;
+    background-size: var(--watermark-size);
 }
 
 .vocero{
@@ -33,7 +33,7 @@
     background-image: url(https://bloximages.newyork1.vip.townnews.com/elvocero.com/content/tncms/custom/image/ebb7a5b0-72fc-11ea-8239-a3651fb650c6.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 15rem;
+    background-size: var(--watermark-size);
 }
 
 .primera_hora{
@@ -52,7 +52,7 @@
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/66/Primera_Hora_logo.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 15rem;
+    background-size: var(--watermark-size);
 }
 
 .metropr{
@@ -71,7 +71,7 @@
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Metro_International_Logo.svg/1200px-Metro_International_Logo.svg.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 15rem;
+    background-size: var(--watermark-size);
 }
 
 .claridad{
@@ -90,5 +90,5 @@
     background-image: url(https://www.claridadpuertorico.com/wp-content/uploads/2019/02/logo-CLARIDAD-60.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 15rem;
+    background-size: var(--watermark-size);
 }
