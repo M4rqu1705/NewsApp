@@ -1,7 +1,7 @@
 function update_max_articles() {
     MAX_ARTICLES = max_articles_input.value;
-    if (MAX_ARTICLES !== '' && MAX_ARTICLES < 50) {
-        update_screen();
+    if (MAX_ARTICLES === '' || MAX_ARTICLES > 50) {
+        MAX_ARTICLES = 2;
     }
 }
 
@@ -62,6 +62,7 @@ function update_screen(requestAgain = true) {
     if (requestAgain) {
         axios.get(`${api_server}/api/v1/services/news_scraping?papers=${papers.join(",")}&max_articles=${MAX_ARTICLES}`)
             .then(function (articles) {
+                console.log(articles)
                 previous_content = articles;
                 add_articles(articles);
             })
@@ -144,7 +145,7 @@ function insertCard(article, paper) {
     container.appendChild(card);
 }
 
-document.addEventListener("readystatechange", function (e) {
+window.addEventListener("load", function (e) {
     update_screen();
     if (typeof (localStorage.getItem("theme")) === "string") {
         set_theme(localStorage.getItem("theme"));

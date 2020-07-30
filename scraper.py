@@ -8,12 +8,14 @@ import xmltodict
 #  import re
 import datetime as dt
 import concurrent.futures
+import json
 #  import time
 
 MAX_THREADS = 50
 DEBUG = False
-SYNCHRONOUS = True
+SYNCHRONOUS = False
 MAX_ARTICLES = 100
+SECONDS_UNTIL_OLD = 30 * 60
 
 def retrieve_site(url):
     try:
@@ -26,14 +28,69 @@ def retrieve_site(url):
         return None
 
 def sort_and_format(output):
+    # Make sure datetimes have the correct type
+    for i, el in enumerate(output):
+        if isinstance(el['last_edited'], dt.datetime):
+            el['last_edited'] = el['last_edited'] - dt.timedelta(hours=4)
+            #  output[i]['last_edited'] = el['last_edited'].strftime("%b %d, %Y | %I:%M:%S %p")
+        else:
+            el['last_edited'] = dt.datetime.strptime(el['last_edited'], "%b %d, %Y | %I:%M:%S %p")
+        output[i]['last_edited'] = el['last_edited']
+
+    # Sort now that we are sure that we have the correct types
     output.sort(key=lambda x: x['last_edited'])
     output = output[::-1]
 
+    # Convert to string to prepare for display
     for i, el in enumerate(output):
-        el['last_edited'] = el['last_edited'] - dt.timedelta(hours=4)
         output[i]['last_edited'] = el['last_edited'].strftime("%b %d, %Y | %I:%M:%S %p")
 
     return output
+
+def retrieve_cache(newspaper, amount):
+    cache = dict()
+
+    # Extract cache from file
+    with open("cache.json", "r+") as fp:
+        cache = json.load(fp)
+
+    articles = cache[newspaper][-amount:]
+    return articles
+
+def store_cache(articles, newspaper):
+    cache = dict()
+
+    # Extract cache from file
+    with open("cache.json", "r+") as fp:
+        cache = json.load(fp)
+
+    # Append recently-added articles to the list of articles for the specific newspaper ...
+    for article in articles:
+
+        recently_reset = False
+        matching_index = -1
+        for i, item in enumerate(cache[newspaper]):
+            if article["url"].lower().strip() == item["url"].lower().strip():
+                matching_index = i
+                if  dt.datetime.now().timestamp() - SECONDS_UNTIL_OLD > item["last_reset"]:
+                    recently_reset = True
+                break
+
+        # Only if it hasn't been reset within the last `SECONDS_UNTIL_OLD`
+        article["last_reset"] = dt.datetime.now().timestamp()
+        if not recently_reset and matching_index >= 0:
+            cache[newspaper][i] = article
+        elif matching_index == -1:
+            cache[newspaper].append(article)
+
+    # Remove "old" articles (more than SECONDS_UNTIL_OLD since last reset)
+    cache[newspaper] = [item for item in cache[newspaper] if dt.datetime.now().timestamp() - SECONDS_UNTIL_OLD < item["last_reset"] ]
+
+
+    # Store cache back to file
+    with open("cache.json", "w+") as fp:
+        cache = json.dump(cache, fp)
+
 
 def endi():
     output = []
@@ -45,6 +102,14 @@ def endi():
 
         #  priority = float(article['priority'])
         #  changefreq = article['changefreq']
+
+        cache = retrieve_cache("endi", 0)
+        for item in cache:
+            # If urls match, the article must be the same, so return cached article
+            if url.lower().strip() == item['url'].lower().strip():
+                del item["last_reset"]
+                output.append(item)
+                return
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
@@ -115,7 +180,11 @@ def endi():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return sort_and_format(output)
+        output = sort_and_format(output)
+
+        store_cache(output, 'endi')
+
+        return output
 
 
     else:
@@ -135,6 +204,14 @@ def vocero():
         #  keywords = article['news:news']['news:keywords'].split(',')
         #  news_name = article['news:news']['news:publication']['news:name']
         #  news_language = article['news:news']['news:publication']['news:language']
+
+        cache = retrieve_cache("vocero", 0)
+        for item in cache:
+            # If urls match, the article must be the same, so return cached article
+            if url.lower().strip() == item['url'].lower().strip():
+                del item["last_reset"]
+                output.append(item)
+                return
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
@@ -220,6 +297,15 @@ def primera_hora():
         #  news_name = article['news:news']['news:publication']['news:name']
         #  news_language = article['news:news']['news:publication']['news:language']
         #  changefreq = article['changefreq']
+
+        cache = retrieve_cache("primera_hora", 0)
+        for item in cache:
+            # If urls match, the article must be the same, so return cached article
+            if url.lower().strip() == item['url'].lower().strip():
+                del item["last_reset"]
+                output.append(item)
+                return
+
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
@@ -337,6 +423,14 @@ def metropr():
         #  news_language = article['n:news']['n:publication']['n:language']
         #  keywords = article['n:news']['n:keywords'].split(',')
 
+        cache = retrieve_cache("metropr", 0)
+        for item in cache:
+            # If urls match, the article must be the same, so return cached article
+            if url.lower().strip() == item['url'].lower().strip():
+                del item["last_reset"]
+                output.append(item)
+                return
+
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
 
@@ -418,6 +512,14 @@ def claridad():
         #  changefreq = article['changefreq']
         #  priority = article['priority']
 
+        cache = retrieve_cache("claridad", 0)
+        for item in cache:
+            # If urls match, the article must be the same, so return cached article
+            if url.lower().strip() == item['url'].lower().strip():
+                del item["last_reset"]
+                output.append(item)
+                return
+
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
 
@@ -446,7 +548,6 @@ def claridad():
 
             bs4_p = bs4_article_body.findAll(['p', 'ul'])
             content = '\n\n'.join([p.text.strip() for p in bs4_p])
-            #  breakpoint()
 
 
             # Use some initial words as subtitle
@@ -507,7 +608,7 @@ COMPLETE_NEWSPAPERS = list(FUNCTIONS.keys())
 
 
 if __name__ == "__main__":
-    outputs = {}
+    #  outputs = {}
 
     #  outputs['endi'] = endi()
     #  outputs['vocero'] = vocero()
@@ -515,3 +616,14 @@ if __name__ == "__main__":
     # MAYBE NOTICEL (Es un revolú)
     #  outputs['metropr'] = metropr()
     #  outputs['claridad'] = claridad()
+
+    with open("cache.json", "x+") as fp:
+        sample_cache = {
+                "endi": [],
+                "vocero": [],
+                "primera_hora": [],
+                "metropr": [],
+                "claridad": [],
+                }
+
+        json.dump(sample_cache, fp)
