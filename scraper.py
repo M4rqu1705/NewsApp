@@ -5,17 +5,17 @@
 import bs4
 import requests
 import xmltodict
-#  import re
 import datetime as dt
 import concurrent.futures
 import json
-#  import time
+import pytz
 
 MAX_THREADS = 50
 DEBUG = False
 SYNCHRONOUS = False
 MAX_ARTICLES = 100
 SECONDS_UNTIL_OLD = 30 * 60
+desired_timezone = pytz.timezone("America/Puerto_Rico")
 
 def retrieve_site(url):
     try:
@@ -27,22 +27,15 @@ def retrieve_site(url):
     except Exception:
         return None
 
-def sort_and_format(output):
+def format(output):
     # Make sure datetimes have the correct type
     for i, el in enumerate(output):
         if isinstance(el['last_edited'], dt.datetime):
-            el['last_edited'] = el['last_edited'] - dt.timedelta(hours=4)
-            #  output[i]['last_edited'] = el['last_edited'].strftime("%b %d, %Y | %I:%M:%S %p")
+            el['last_edited'] = el['last_edited']
         else:
             el['last_edited'] = dt.datetime.strptime(el['last_edited'], "%b %d, %Y | %I:%M:%S %p")
-        output[i]['last_edited'] = el['last_edited']
 
-    # Sort now that we are sure that we have the correct types
-    output.sort(key=lambda x: x['last_edited'])
-    output = output[::-1]
-
-    # Convert to string to prepare for display
-    for i, el in enumerate(output):
+        # Convert to string to prepare for display
         output[i]['last_edited'] = el['last_edited'].strftime("%b %d, %Y | %I:%M:%S %p")
 
     return output
@@ -180,7 +173,7 @@ def endi():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        output = sort_and_format(output)
+        output = format(output)
 
         store_cache(output, 'endi')
 
@@ -275,7 +268,7 @@ def vocero():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return sort_and_format(output)
+        return format(output)
 
     else:
         return None
@@ -378,7 +371,7 @@ def primera_hora():
                 'image': image_url,
                 'article': content,
                 'url': url,
-                'paper': 'vocero'
+                'paper': 'primera_hora'
                 })
 
     response = retrieve_site('https://www.primerahora.com/arcio/news-sitemap/')
@@ -400,7 +393,7 @@ def primera_hora():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return sort_and_format(output)
+        return format(output)
 
     else:
         return None
@@ -458,10 +451,14 @@ def metropr():
                 image_url = bs4_image['src']
 
             # Retrieve article content
-            bs4_article_body = soup.select_one('div.resumen')
+            content = ""
+            try:
+                bs4_article_body = soup.select_one('div.resumen')
 
-            bs4_p = bs4_article_body.findAll(['p', 'h4'])
-            content = '\n\n'.join([p.text.strip() for p in bs4_p])
+                bs4_p = bs4_article_body.findAll(['p', 'h4'])
+                content = '\n\n'.join([p.text.strip() for p in bs4_p])
+            except:
+                return
 
             if DEBUG:
                 print(f' - {title[0:10]}… ({last_edited}) - {content[0:20]}… \n')
@@ -473,7 +470,7 @@ def metropr():
                 'image': image_url,
                 'article': content.encode("iso-8859-1", "ignore").decode("utf-8", "ignore"),
                 'url': url,
-                'paper': 'vocero'
+                'paper': 'metropr'
                 })
 
     response = retrieve_site('https://www.metro.pr/pr/sitemap/news-sitemap.xml')
@@ -495,7 +492,7 @@ def metropr():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return sort_and_format(output)
+        return format(output)
 
     else:
         return None
@@ -563,7 +560,7 @@ def claridad():
                 'image': image_url,
                 'article': content,
                 'url': url,
-                'paper': 'vocero'
+                'paper': 'claridad'
                 })
 
     year = dt.datetime.now().year
@@ -591,7 +588,7 @@ def claridad():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return sort_and_format(output)
+        return format(output)
 
     else:
         return None

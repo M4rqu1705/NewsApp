@@ -15,17 +15,16 @@
     <link rel="stylesheet" href="/static/css/watermarks.css">
     <link rel="stylesheet" href="/static/css/menu.css">
     <link rel="stylesheet" href="/static/css/themes.css">
-    <link rel="stylesheet" href="/static/css/dropdown.css">
 </head>
 
 <body>
     <div id="menu">
 
         <div id="menu__color-dropdown">
-            <button onclick="color_toggle(this)" id="menu__color-dropdown__dropdown-button">
+            <button onclick="toggle_colors_dropdown()" id="menu__color-dropdown__dropdown-button">
                 <i class="fa fa-fw fa-angle-down"></i>
             </button>
-            <div id="menu__color-dropdown__dropdown-content" class="dropdown-content">
+            <div id="menu__color-dropdown__dropdown-content">
                 <button onclick="set_theme('darkaquamarine')" id="darkaquamarine-color"></button>
                 <button onclick="set_theme('coolmonochrome')" id="coolmonochrome-color"></button>
                 <button onclick="set_theme('darkred')" id="darkred-color"></button>
@@ -39,27 +38,28 @@
             </div>
         </div>
 
-        <input type="text" id="menu__keyword-search" oninput="update_screen(false)"
+        <input type="search" id="menu__keyword-search" oninput="update_screen(false)"
             placeholder="keywords separados por `,`">
 
 
-        <input type="number" id="menu__max-articles" oninput="update_max_articles()" value="2" min="1" max="50">
+        <input type="number" id="menu__max-articles" oninput="update_max_articles()" value="2">
 
         <div id="menu__papers-filter-dropdown">
-            <button onclick="dropdown_toggle(this)"
-                id="menu__papers-filter-dropdown__dropdown-button">Periódicos</button>
+            <button onclick="toggle_newspaper_filter_dropdown()" id="menu__papers-filter-dropdown__dropdown-button">
+                <i class="fa fa-fw fa-filter"></i>
+            </button>
             <div id="menu__papers-filter-dropdown__dropdown-content" class="dropdown-content">
 
                 <input type="checkbox" id="endi_check" name="endi_check" value="endi" checked>
                 <label for="endi_check">El Nuevo Dia</label><br>
 
-                <input type="checkbox" id="vocero_check" name="vocero_check" value="vocero">
+                <input type="checkbox" id="vocero_check" name="vocero_check" value="vocero" checked>
                 <label for="vocero_check">Vocero</label><br>
 
                 <input type="checkbox" id="primera_hora_check" name="primera_hora_check" value="primera_hora">
                 <label for="primera_hora_check">Primera Hora</label><br>
 
-                <input type="checkbox" id="metro_check" name="metro_check" value="metropr">
+                <input type="checkbox" id="metro_check" name="metro_check" value="metropr" checked>
                 <label for="metro_check">Metro PR</label><br>
 
                 <input type="checkbox" id="claridad_check" name="claridad_check" value="claridad">
@@ -67,7 +67,32 @@
             </div>
         </div>
 
-        <button id="menu__search" onclick="update_screen(); menu_off();">
+        <div id="menu__sorters-dropdown">
+            <button onclick="toggle_sorters_dropdown()" id="menu__sorters-dropdown__dropdown-button">
+                <i class="fa fa-fw fa-sort"></i>
+            </button>
+            <div id="menu__sorters-dropdown__dropdown-content">
+                <div>
+                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__inverse_chronological_order"
+                        checked>
+                    <label for="menu__sorters-dropdown__inverse_chronological_order">Recientes Primero</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__chronological_order">
+                    <label for="menu__sorters-dropdown__chronological_order">Antiguos Primero</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__long-ascending">
+                    <label for="menu__sorters-dropdown__long-ascending">Cortos Primero</label>
+                </div>
+                <div>
+                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__long-descending">
+                    <label for="menu__sorters-dropdown__long-descending">Largos Primero</label>
+                </div>
+            </div>
+        </div>
+
+        <button id="menu__search" onclick="update_screen(); hide_menu();">
             <i class="fa fa-fw fa-search"></i>
         </button>
 
@@ -90,7 +115,6 @@
     <script src="/static/js/globals.js"></script>
     <script src="/static/js/overlay.js"></script>
     <script src="/static/js/menu.js"></script>
-    <script src="/static/js/dropdown.js"></script>
     <script src="/static/js/themes.js"></script>
     <script src="/static/js/script.js"></script>
 </body>

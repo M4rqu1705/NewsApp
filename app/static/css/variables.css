@@ -28,13 +28,14 @@
     --card-margin: 1rem;
 
     --menu-content-alignment: flex-start;
-    --menu-space-around: 1rem;
     --menu-width: 25rem;
     --menu-font-size: 1.5rem;
     --max-articles-margin-bottom: auto;
     --papers-filter-dropdown-content__left-shift: 10%;
+    --menu-space-around: 0.75rem;
 
     --dropdown-margin-sides: 0rem;
+    --dropdown-height: 24rem;
 
     --color-dropdown-content-left-margin: 1rem;
 
@@ -70,9 +71,5 @@
         --menu-font-size: 1.25rem;
         --max-articles-margin-bottom: 2rem;
         --papers-filter-dropdown-content__left-shift: 0;
-
-        --dropdown-margin-sides: 0;
-
-        --color-dropdown-content-left-margin: -60%;
     }
 }

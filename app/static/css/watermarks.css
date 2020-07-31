@@ -1,9 +1,10 @@
-.endi{
+div[class $= "__watermark"] {
     position: relative;
     background: var(--main-bg-color);
     overflow: hidden;
 }
-.endi::before{
+
+div[class $= "__watermark"]::before {
     content: '';
     display: block;
     position: absolute;
@@ -11,84 +12,27 @@
     width: 100%; height: 100%;
     z-index: 0;
     opacity: var(--watermark-opacity);
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/El_Nuevo_D%C3%ADa_%282019-11-01%29.svg/1200px-El_Nuevo_D%C3%ADa_%282019-11-01%29.svg.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: var(--watermark-size);
 }
 
-.vocero{
-    position: relative;
-    background: var(--main-bg-color);
-    overflow: hidden;
-}
-.vocero::before{
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    opacity: var(--watermark-opacity);
-    background-image: url(https://bloximages.newyork1.vip.townnews.com/elvocero.com/content/tncms/custom/image/ebb7a5b0-72fc-11ea-8239-a3651fb650c6.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: var(--watermark-size);
+.endi__watermark::before{
+    background-image: url("/static/img/endi-logo.png");
 }
 
-.primera_hora{
-    position: relative;
-    background: var(--main-bg-color);
-    overflow: hidden;
-}
-.primera_hora::before{
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    opacity: var(--watermark-opacity);
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/66/Primera_Hora_logo.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: var(--watermark-size);
+.vocero__watermark::before {
+    background-image: url("/static/img/vocero-logo.png");
 }
 
-.metropr{
-    position: relative;
-    background: var(--main-bg-color);
-    overflow: hidden;
-}
-.metropr::before{
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    opacity: var(--watermark-opacity);
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Metro_International_Logo.svg/1200px-Metro_International_Logo.svg.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: var(--watermark-size);
+.primera_hora__watermark::before {
+    background-image: url("/static/img/primera_hora-logo.png");
 }
 
-.claridad{
-    position: relative;
-    background: var(--main-bg-color);
-    overflow: hidden;
+.metropr__watermark::before {
+    background-image: url("/static/img/metropr-logo.png");
 }
-.claridad::before{
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    opacity: var(--watermark-opacity);
-    background-image: url(https://www.claridadpuertorico.com/wp-content/uploads/2019/02/logo-CLARIDAD-60.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: var(--watermark-size);
+
+.claridad__watermark::before {
+    background-image: url("/static/img/claridad-logo.png");
 }

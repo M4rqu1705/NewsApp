@@ -25,6 +25,7 @@
     margin: var(--overlay-margin);
     padding: var(--overlay-padding);
     padding-top: 2rem;
+    padding-bottom: 10rem;
 }
 
 #overlay__news-article__title {

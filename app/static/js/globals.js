@@ -4,10 +4,16 @@ var keywords_input = document.getElementById("menu__keyword-search")
 var container = document.getElementById("news-articles");
 var menu = document.getElementById("menu");
 var root = document.documentElement;
+var computed_root = getComputedStyle(root);
 var api_server = "https://marcos-newsapp.herokuapp.com";
 // var api_server = "http://127.0.0.1:5000";
-var MAX_ARTICLES = max_articles_input.value;
-var previous_content;
+var max_articles = max_articles_input.value;
+var previous_articles;
+
+const MAX_ARTICLES = 25;
+const DEFAULT_SORT_ORDER = 0
+max_articles_input.min = 1;
+max_articles_input.max = MAX_ARTICLES;
 
 
 // Thank you https://www.w3schools.com/howto/howto_css_overlay.asp
