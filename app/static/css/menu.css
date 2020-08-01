@@ -36,8 +36,6 @@
     margin: var(--menu-space-around) auto;
     padding: .75rem;
 
-    -webkit-box-shadow: 0px 0px 2px 2px var(--accent-color);
-    -moz-box-shadow: 0px 0px 2px 2px var(--accent-color);
     box-shadow: 0px 0px 2px 2px var(--accent-color);
 
 }
@@ -50,8 +48,6 @@
     font-size: calc(var(--menu-font-size) * 4 / 5);
     text-align: center;
     margin: var(--menu-space-around) auto;
-    -webkit-box-shadow: 0px 0px 2px 2px var(--accent-color);
-    -moz-box-shadow: 0px 0px 2px 2px var(--accent-color);
     box-shadow: 0px 0px 2px 2px var(--accent-color);
 }
 
@@ -59,14 +55,7 @@
 #menu__max-articles:focus{
     border: none;
     outline: 0;
-    -moz-outline: 0;
-    -ms-outline:0;
-    -o-outline: 0;
-    -webkit-outline: 0;
 
-
-    -webkit-box-shadow: 0px 0px 5px 5px var(--accent-color);
-    -moz-box-shadow: 0px 0px 5px 5px var(--accent-color);
     box-shadow: 0px 0px 5px 5px var(--accent-color);
 }
 
@@ -134,8 +123,6 @@
 
     z-index: 3;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
     box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
 }
 
@@ -143,13 +130,7 @@
 #menu__color-dropdown__dropdown-content > button:active {
     border: none;
     outline: 0;
-    -moz-outline: 0;
-    -ms-outline:0;
-    -o-outline: 0;
-    -webkit-outline: 0;
 
-    -webkit-box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.75);
 }
 
@@ -179,8 +160,6 @@
 
     z-index: 3;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
     box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
 }
 
@@ -211,8 +190,6 @@
 
     z-index: 3;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
     box-shadow: 0px 5px 5px 1px rgba(0,0,0,1);
 }
 
@@ -233,10 +210,6 @@ button[id $= "dropdown-button"]:focus,
  button[id $= "dropdown-button"]:active {
     border: none;
     outline: 0;
-    -moz-outline: 0;
-    -ms-outline:0;
-    -o-outline: 0;
-    -webkit-outline: 0;
 }
 
 /* SHOW -- SHOW -- SHOW -- SHOW -- SHOW -- SHOW -- SHOW -- SHOW -- SHOW -- SHOW */

@@ -18,5 +18,8 @@ max_articles_input.max = MAX_ARTICLES;
 
 // Thank you https://www.w3schools.com/howto/howto_css_overlay.asp
 // Thank you https://scotch.io/tutorials/how-to-change-a-css-background-images-opacity
+// Thank you https://www.w3schools.com/howto/howto_css_custom_checkbox.asp
+
+// Thank you http://zetcode.com/gulp/getting-started/ and http://snippetvalley.com/combine-and-minify-all-css-and-javascript-with-gulp/
 
 // https://autoprefixer.github.io/

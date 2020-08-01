@@ -86,12 +86,12 @@ function add_articles(articles) {
 
     // Find out what is the sort criteria
     let sort_order = DEFAULT_SORT_ORDER;
-    const temp = document.getElementById("menu__sorters-dropdown__dropdown-content");
-    for (let i = 0, l0 = temp.children.length; i < l0; i++) {
-        if (temp.children[i].children[0].checked) {
+    const temp = document.getElementById("menu__sorters-dropdown__dropdown-content").children;
+    for (let i = 0, l0 = temp.length; i < l0; i++) {
+        if (temp[i].tagName === "LABEL" && temp[i].children[0].checked) {
 
             // Check last "segment" of id to determine sort order
-            switch (temp.children[i].children[0].id.split("__").slice(-1)[0]) {
+            switch (temp[i].children[0].id.split("__").slice(-1)[0]) {
                 case "inverse_chronological_order":
                     sort_order = 0;
                     break;
@@ -177,8 +177,8 @@ function update_screen(requestAgain = true) {
 
     const temp = document.getElementById("menu__papers-filter-dropdown__dropdown-content").children;
     for (let i = 0, l0 = temp.length; i < l0; i++) {
-        if (temp[i].tagName === "INPUT" && temp[i].checked) {
-            papers.push(temp[i].value);
+        if (temp[i].tagName === "LABEL" && temp[i].children[0].checked) {
+            papers.push(temp[i].children[0].value);
         }
     }
 
