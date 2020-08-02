@@ -173,7 +173,6 @@ function update_screen(requestAgain = true) {
 
 
 window.addEventListener("load", function (e) {
-    update_screen();
     if (typeof (localStorage.getItem("theme")) === "string") {
         set_theme(localStorage.getItem("theme"));
     } else {
@@ -182,4 +181,5 @@ window.addEventListener("load", function (e) {
 
     restore_preferences();
     store_preferences();
+    update_screen();
 });

@@ -115,6 +115,8 @@ function store_preferences() {
 }
 
 function restore_preferences() {
+
+
     if (localStorage.getItem("selected_newspapers") !== null) {
         const selected_newspapers = JSON.parse(localStorage.getItem("selected_newspapers"));
 
@@ -130,7 +132,11 @@ function restore_preferences() {
                 newspaper_dropdown[i].children[0].checked = false;
             }
         }
+    } else {
+        const selected_newspapers = ["endi", "vocero"];
+        localStorage.setItem("selected_newspapers", JSON.stringify(selected_newspapers));
     }
+
 
     if (localStorage.getItem("selected_order") !== null) {
         const selected_order = localStorage.getItem("selected_order");
@@ -146,12 +152,17 @@ function restore_preferences() {
                 break;
             }
         }
-
+    } else {
+        const selected_order = "chronological_order";
+        localStorage.setItem("selected_order", JSON.stringify(selected_order));
     }
+
+
 
     if (localStorage.getItem("amount_articles") !== null) {
         const amount_articles = localStorage.getItem("amount_articles");
         max_articles_input.value = Number(amount_articles);
+        max_articles = Number(amount_articles);
     }
 
 }
