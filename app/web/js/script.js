@@ -1,16 +1,3 @@
-function update_max_articles() {
-    max_articles = max_articles_input.value;
-
-    // If restrictions are not met, use default value
-    if (max_articles === '') {
-        max_articles = 2;
-    } else if (typeof max_articles === "number" && max_articles <= 0) {
-        max_articles = 1;
-    } else if (typeof max_articles === "number" && max_articles > MAX_ARTICLES) {
-        max_articles = MAX_ARTICLES;
-    }
-}
-
 function insertCard(article) {
     // Card title
     const title_el = document.createElement("h2");
@@ -86,29 +73,22 @@ function add_articles(articles) {
 
     // Find out what is the sort criteria
     let sort_order = DEFAULT_SORT_ORDER;
-    const temp = document.getElementById("menu__sorters-dropdown__dropdown-content").children;
-    for (let i = 0, l0 = temp.length; i < l0; i++) {
-        if (temp[i].tagName === "LABEL" && temp[i].children[0].checked) {
 
-            // Check last "segment" of id to determine sort order
-            switch (temp[i].children[0].id.split("__").slice(-1)[0]) {
-                case "inverse_chronological_order":
-                    sort_order = 0;
-                    break;
-                case "chronological_order":
-                    sort_order = 1;
-                    break;
-                case "long-ascending":
-                    sort_order = 2;
-                    break;
-                case "long-descending":
-                    sort_order = 3;
-                    break;
-                default:
-                    break;
-            }
+    switch (localStorage.getItem("selected_order")) {
+        case "inverse_chronological_order":
+            sort_order = 0;
             break;
-        }
+        case "chronological_order":
+            sort_order = 1;
+            break;
+        case "long-ascending":
+            sort_order = 2;
+            break;
+        case "long-descending":
+            sort_order = 3;
+            break;
+        default:
+            break;
     }
 
     // Sort articles by sort criteria
@@ -144,7 +124,6 @@ function add_articles(articles) {
     ];
 
     articles_arr.sort(comparison_functions[sort_order]);
-    console.log(articles_arr);
 
 
     // Extract list of keywords by which to filter the articles through
@@ -173,20 +152,15 @@ function update_screen(requestAgain = true) {
     container.innerHTML = "";
 
     // Prepare which news papers to filter for
-    let papers = [];
-
-    const temp = document.getElementById("menu__papers-filter-dropdown__dropdown-content").children;
-    for (let i = 0, l0 = temp.length; i < l0; i++) {
-        if (temp[i].tagName === "LABEL" && temp[i].children[0].checked) {
-            papers.push(temp[i].children[0].value);
-        }
-    }
+    let papers = JSON.parse(localStorage.getItem("selected_newspapers"));
 
     // Retrieve newspaper from backend
     if (requestAgain) {
+        loader_on();
         axios.get(`${api_server}/api/v1/services/news_scraping?papers=${papers.join(",")}&max_articles=${max_articles}`)
             .then(function (articles) {
                 previous_articles = articles;
+                loader_off();
                 add_articles(articles);
             })
             .catch(function (error) {
@@ -205,4 +179,7 @@ window.addEventListener("load", function (e) {
     } else {
         set_theme("default");
     }
+
+    restore_preferences();
+    store_preferences();
 });

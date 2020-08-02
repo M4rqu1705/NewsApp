@@ -16,6 +16,8 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     overflow-x: hidden;
+    /* overflow: hidden; */
+
 
     font-family: Lato, Arial;
     color: var(--main-color);

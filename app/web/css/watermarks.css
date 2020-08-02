@@ -18,21 +18,21 @@ div[class $= "__watermark"]::before {
 }
 
 .endi__watermark::before{
-    background-image: url("/static/img/endi-logo.png");
+    background-image: url("../img/endi-logo.webp");
 }
 
 .vocero__watermark::before {
-    background-image: url("/static/img/vocero-logo.png");
+    background-image: url("../img/vocero-logo.webp");
 }
 
 .primera_hora__watermark::before {
-    background-image: url("/static/img/primera_hora-logo.png");
+    background-image: url("../img/primera_hora-logo.webp");
 }
 
 .metropr__watermark::before {
-    background-image: url("/static/img/metropr-logo.png");
+    background-image: url("../img/metropr-logo.webp");
 }
 
 .claridad__watermark::before {
-    background-image: url("/static/img/claridad-logo.png");
+    background-image: url("../img/claridad-logo.webp");
 }

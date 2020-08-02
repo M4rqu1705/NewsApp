@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcos - NewsApp</title>
 
+    <base href="..">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- <link rel="stylesheet" href="/static/css/variables.css"> -->
-    <!-- <link rel="stylesheet" href="/static/css/general.css"> -->
-    <!-- <link rel="stylesheet" href="/static/css/card.css"> -->
-    <!-- <link rel="stylesheet" href="/static/css/overlay.css"> -->
-    <!-- <link rel="stylesheet" href="/static/css/watermarks.css"> -->
-    <!-- <link rel="stylesheet" href="/static/css/menu.css"> -->
-    <!-- <link rel="stylesheet" href="/static/css/themes.css"> -->
-    <link rel="stylesheet" href="/static/dist/app.css">
+    <link rel="stylesheet" href="/static/css/variables.css">
+    <link rel="stylesheet" href="/static/css/general.css">
+    <link rel="stylesheet" href="/static/css/card.css">
+    <link rel="stylesheet" href="/static/css/overlay.css">
+    <link rel="stylesheet" href="/static/css/watermarks.css">
+    <link rel="stylesheet" href="/static/css/menu.css">
+    <link rel="stylesheet" href="/static/css/themes.css">
 </head>
 
 <body>
@@ -43,7 +44,7 @@
             placeholder="keywords separados por `,`">
 
 
-        <input type="number" id="menu__max-articles" oninput="update_max_articles()" value="2">
+        <input type="number" id="menu__max-articles" oninput="update_max_articles();" value="4">
 
         <div id="menu__papers-filter-dropdown">
             <button onclick="toggle_newspaper_filter_dropdown()" id="menu__papers-filter-dropdown__dropdown-button">
@@ -52,31 +53,31 @@
             <div id="menu__papers-filter-dropdown__dropdown-content">
 
                 <label class="checkbox-container">
-                    <input type="checkbox" id="endi_check" value="endi" checked>
+                    <input type="checkbox" id="endi_check" value="endi" checked onchange="store_preferences()">
                     <span class="custom-checkmark"></span>
                     El Nuevo Dia
                 </label><br>
 
                 <label class="checkbox-container">
-                    <input type="checkbox" id="vocero_check" value="vocero" checked>
+                    <input type="checkbox" id="vocero_check" value="vocero" checked onchange="store_preferences()">
                     <span class="custom-checkmark"></span>
                     Vocero
                 </label><br>
 
                 <label class="checkbox-container">
-                    <input type="checkbox" id="primera_hora_check" value="primera_hora">
+                    <input type="checkbox" id="primera_hora_check" value="primera_hora" onchange="store_preferences()">
                     <span class="custom-checkmark"></span>
                     Primera Hora
                 </label><br>
 
                 <label class="checkbox-container">
-                    <input type="checkbox" id="metro_check" value="metropr">
+                    <input type="checkbox" id="metro_check" value="metropr" onchange="store_preferences()">
                     <span class="custom-checkmark"></span>
                     Metro PR
                 </label><br>
 
                 <label class="checkbox-container">
-                    <input type="checkbox" id="claridad_check" value="claridad">
+                    <input type="checkbox" id="claridad_check" value="claridad" onchange="store_preferences()">
                     <span class="custom-checkmark"></span>
                     Claridad
                 </label>
@@ -91,22 +92,25 @@
             <div id="menu__sorters-dropdown__dropdown-content">
                 <label class="radio-container">
                     <input type="radio" name="sort_order" id="menu__sorters-dropdown__inverse_chronological_order"
-                        checked>
+                        checked onchange="store_preferences()">
                     <span class="custom-radio"></span>
                     Recientes Primero
                 </label><br>
                 <label class="radio-container">
-                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__chronological_order">
+                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__chronological_order"
+                        onchange="store_preferences()">
                     <span class="custom-radio"></span>
                     Antiguos Primero
                 </label><br>
                 <label class="radio-container">
-                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__long-ascending">
+                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__long-ascending"
+                        onchange="store_preferences()">
                     <span class="custom-radio"></span>
                     Cortos Primero
                 </label><br>
                 <label class="radio-container">
-                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__long-descending">
+                    <input type="radio" name="sort_order" id="menu__sorters-dropdown__long-descending"
+                        onchange="store_preferences()">
                     <span class="custom-radio"></span>
                     Largos Primero
                 </label>
@@ -120,7 +124,7 @@
     </div>
     <button id="menu__open-button" onclick="toggle_menu()">&#9776;</button>
 
-
+    <div class="loader"></div>
     <div id="overlay">
         <div id="overlay__news-article"></div>
     </div>
@@ -133,12 +137,11 @@
 
     <!-- SCRIPT -- SCRIPT -- SCRIPT -- SCRIPT -- SCRIPT -->
     <script src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>
-    <!-- <script src="/static/js/globals.js"></script> -->
-    <!-- <script src="/static/js/overlay.js"></script> -->
-    <!-- <script src="/static/js/menu.js"></script> -->
-    <!-- <script src="/static/js/themes.js"></script> -->
-    <!-- <script src="/static/js/script.js"></script> -->
-    <script src="/static/dist/app-min.js"></script>
+    <script src="/static/js/globals.js"></script>
+    <script src="/static/js/overlay.js"></script>
+    <script src="/static/js/menu.js"></script>
+    <script src="/static/js/themes.js"></script>
+    <script src="/static/js/script.js"></script>
 </body>
 
 </html>

@@ -16,3 +16,12 @@ function overlay_toggle() {
         overlay_on();
     }
 }
+
+
+function loader_on() {
+    loader.style.display = "block";
+}
+
+function loader_off() {
+    loader.style.display = "none";
+}

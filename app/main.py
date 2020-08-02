@@ -3,7 +3,10 @@ from flask import request, jsonify, render_template
 from flask_cors import CORS
 import scraper
 
-app = flask.Flask(__name__)
+app = flask.Flask(
+        __name__,
+        static_folder = './web/dist/static',
+        template_folder = './web/dist/templates')
 cors = CORS(app)
 app.config['DEBUG'] = True
 

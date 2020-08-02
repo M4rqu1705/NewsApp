@@ -3,10 +3,10 @@ var max_articles_input = document.getElementById("menu__max-articles");
 var keywords_input = document.getElementById("menu__keyword-search")
 var container = document.getElementById("news-articles");
 var menu = document.getElementById("menu");
+var loader = document.getElementsByClassName("loader")[0];
 var root = document.documentElement;
 var computed_root = getComputedStyle(root);
-var api_server = "https://marcos-newsapp.herokuapp.com";
-// var api_server = "http://127.0.0.1:5000";
+var api_server = "http://127.0.0.1:5000";
 var max_articles = max_articles_input.value;
 var previous_articles;
 
