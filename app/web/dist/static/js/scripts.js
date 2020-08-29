@@ -10,7 +10,7 @@ var api_server = "https://marcos-newsapp.herokuapp.com";
 var max_articles = max_articles_input.value;
 var previous_articles;
 
-const MAX_ARTICLES = 25;
+const MAX_ARTICLES = 50;
 const DEFAULT_SORT_ORDER = 0
 max_articles_input.min = 1;
 max_articles_input.max = MAX_ARTICLES;

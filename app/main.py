@@ -17,13 +17,13 @@ def home():
 
 @app.route('/api/v1/services/news_scraping/all', methods=['GET'])
 def scrape_all():
-    
     if 'max_articles' in request.args:
         try:
             scraper.MAX_ARTICLES = int(request.args['max_articles'])
         except TypeError:
             return 'Error: max_articles is not a number. Please enter a number'
 
+    scraper.retrieve_cache()
     outputs = {}
 
     outputs['endi'] = scraper.endi()
@@ -32,18 +32,20 @@ def scrape_all():
     outputs['metropr'] = scraper.metropr()
     outputs['claridad'] = scraper.claridad()
 
+    scraper.store_cache()
     return jsonify(outputs)
 
 @app.route('/api/v1/services/news_scraping', methods=['GET'])
 def scrape_specific():
-    
     if 'max_articles' in request.args:
         try:
             scraper.MAX_ARTICLES = int(request.args['max_articles'])
         except TypeError:
             return 'Error: max_articles is not a number. Please enter a number'
 
+    scraper.retrieve_cache()
     outputs = {}
+
     if 'paper' in request.args:
         newspaper = request.args['paper']
 
@@ -60,6 +62,7 @@ def scrape_specific():
     else:
         return 'Error: desired newspaper(s) not specified. Please specify newspaper(s) to scrape through'
 
+    scraper.store_cache()
     return jsonify(outputs)
 
 if __name__ == "__main__":

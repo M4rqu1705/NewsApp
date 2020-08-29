@@ -9,13 +9,14 @@ import datetime as dt
 import concurrent.futures
 import json
 import pytz
+from LRUcache import LRUcache
 
 MAX_THREADS = 50
 DEBUG = False
 SYNCHRONOUS = False
 MAX_ARTICLES = 100
-SECONDS_UNTIL_OLD = 30 * 60
 desired_timezone = pytz.timezone("America/Puerto_Rico")
+cache = None
 
 def retrieve_site(url):
     try:
@@ -27,62 +28,19 @@ def retrieve_site(url):
     except Exception:
         return None
 
-def format(output):
-    # Make sure datetimes have the correct type
-    for i, el in enumerate(output):
-        if isinstance(el['last_edited'], dt.datetime):
-            el['last_edited'] = el['last_edited']
-        else:
-            el['last_edited'] = dt.datetime.strptime(el['last_edited'], "%b %d, %Y | %I:%M:%S %p")
+def retrieve_cache():
+    global cache
 
-        # Convert to string to prepare for display
-        output[i]['last_edited'] = el['last_edited'].strftime("%b %d, %Y | %I:%M:%S %p")
+    if cache is None:
+        cache = LRUcache(1000)
 
-    return output
+    cache.load("cache.pickle")
 
-def retrieve_cache(newspaper, amount):
-    cache = dict()
-
-    # Extract cache from file
-    with open("cache.json", "r+") as fp:
-        cache = json.load(fp)
-
-    articles = cache[newspaper][-amount:]
-    return articles
-
-def store_cache(articles, newspaper):
-    cache = dict()
-
-    # Extract cache from file
-    with open("cache.json", "r+") as fp:
-        cache = json.load(fp)
-
-    # Append recently-added articles to the list of articles for the specific newspaper ...
-    for article in articles:
-
-        recently_reset = False
-        matching_index = -1
-        for i, item in enumerate(cache[newspaper]):
-            if article["url"].lower().strip() == item["url"].lower().strip():
-                matching_index = i
-                if  dt.datetime.now().timestamp() - SECONDS_UNTIL_OLD > item["last_reset"]:
-                    recently_reset = True
-                break
-
-        # Only if it hasn't been reset within the last `SECONDS_UNTIL_OLD`
-        article["last_reset"] = dt.datetime.now().timestamp()
-        if not recently_reset and matching_index >= 0:
-            cache[newspaper][i] = article
-        elif matching_index == -1:
-            cache[newspaper].append(article)
-
-    # Remove "old" articles (more than SECONDS_UNTIL_OLD since last reset)
-    cache[newspaper] = [item for item in cache[newspaper] if dt.datetime.now().timestamp() - SECONDS_UNTIL_OLD < item["last_reset"] ]
-
-
-    # Store cache back to file
-    with open("cache.json", "w+") as fp:
-        cache = json.dump(cache, fp)
+def store_cache():
+    global cache
+    if DEBUG:
+        print(f"[!] Cache: {cache.amount} of {cache.capacity}")
+    cache.save("cache.pickle")
 
 
 def endi():
@@ -96,24 +54,22 @@ def endi():
         #  priority = float(article['priority'])
         #  changefreq = article['changefreq']
 
-        cache = retrieve_cache("endi", 0)
-        for item in cache:
-            # If urls match, the article must be the same, so return cached article
-            if url.lower().strip() == item['url'].lower().strip():
-                del item["last_reset"]
-                output.append(item)
-                return
+        in_cache = cache.get(url.lower().strip())
+        #  print(url.lower().strip())
+        if in_cache is not None:
+            output.append(in_cache)
+            return
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
 
-        if response != None and response.ok:
+        if response is not None and response.ok:
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
             # Retrieve title
             bs4_title = soup.select_one('h1.title')
             title = ''
-            if bs4_title == None:
+            if bs4_title is None:
                 title = url.split('/')[-2]
                 while '-' in title:
                     title = title.replace('-', ' ')
@@ -124,18 +80,18 @@ def endi():
             # Retrieve subtitle
             bs4_subtitle = soup.select_one('h1.title + h2')
             subtitle = ''
-            if bs4_subtitle != None:
+            if bs4_subtitle is not None:
                 subtitle = bs4_subtitle.text.strip()
 
             # Retrieve image
             bs4_image = soup.select_one('picture.ResponsiveImage > img.ResponsiveImage__img')
             image_url = ''
-            if bs4_image != None:
+            if bs4_image is not None:
                 image_url = bs4_image['src']
 
             # Retrieve article content
             bs4_article_body = soup.select_one('div.article-body')
-            if bs4_article_body == None:
+            if bs4_article_body is None:
                 bs4_article_body = soup.select_one('div.story-post')
                 title += " (Opinión)"
             bs4_p = bs4_article_body.select('p.content-element')
@@ -150,13 +106,13 @@ def endi():
                 'last_edited': last_edited,
                 'image': image_url,
                 'article': content,
-                'url': url,
+                'url': url.strip().lower(),
                 'paper': 'endi'
                 })
 
     response = retrieve_site('https://www.elnuevodia.com/arcio/sitemap/')
 
-    if response != None and response.ok:
+    if response is not None and response.ok:
         articles = xmltodict.parse(response.text)['urlset']['url']
         if len(articles) > MAX_ARTICLES:
             articles = articles[0:MAX_ARTICLES]
@@ -173,9 +129,9 @@ def endi():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        output = format(output)
-
-        store_cache(output, 'endi')
+        for el in output:
+            key = el['url'].strip().lower()
+            cache.put(key, el)
 
         return output
 
@@ -198,36 +154,33 @@ def vocero():
         #  news_name = article['news:news']['news:publication']['news:name']
         #  news_language = article['news:news']['news:publication']['news:language']
 
-        cache = retrieve_cache("vocero", 0)
-        for item in cache:
-            # If urls match, the article must be the same, so return cached article
-            if url.lower().strip() == item['url'].lower().strip():
-                del item["last_reset"]
-                output.append(item)
-                return
+        in_cache = cache.get(url.lower().strip())
+        if in_cache is not None:
+            output.append(in_cache)
+            return
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
 
-        if response != None and response.ok:
+        if response is not None and response.ok:
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
             # Retrieve title
             bs4_title = soup.select_one('h1.headline')
             title = ''
-            if bs4_title != None:
+            if bs4_title is not None:
                 title = bs4_title.text.strip()
 
             # Retrieve subtitle
             bs4_subtitle = soup.select_one('h1.headline + h2.subhead')
             subtitle = ''
-            if bs4_subtitle != None:
+            if bs4_subtitle is not None:
                 subtitle = bs4_subtitle.text.strip()
 
             # Retrieve image
             bs4_image = soup.select_one('figure.photo > div.image > div > img')
             image_url = ''
-            if bs4_image != None:
+            if bs4_image is not None:
                 image_url = bs4_image['src']
 
             # Retrieve article content
@@ -251,7 +204,7 @@ def vocero():
 
     response = retrieve_site('https://www.elvocero.com/tncms/sitemap/news.xml')
 
-    if response != None and response.ok:
+    if response is not None and response.ok:
         articles = xmltodict.parse(response.text)['urlset']['url']
         if len(articles) > MAX_ARTICLES:
             articles = articles[0:MAX_ARTICLES]
@@ -268,7 +221,11 @@ def vocero():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return format(output)
+        for el in output:
+            key = el['url'].strip().lower()
+            cache.put(key, el)
+
+        return output
 
     else:
         return None
@@ -291,19 +248,16 @@ def primera_hora():
         #  news_language = article['news:news']['news:publication']['news:language']
         #  changefreq = article['changefreq']
 
-        cache = retrieve_cache("primera_hora", 0)
-        for item in cache:
-            # If urls match, the article must be the same, so return cached article
-            if url.lower().strip() == item['url'].lower().strip():
-                del item["last_reset"]
-                output.append(item)
-                return
+        in_cache = cache.get(url.lower().strip())
+        if in_cache is not None:
+            output.append(in_cache)
+            return
 
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
 
-        if response != None and response.ok:
+        if response is not None and response.ok:
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
             opinion = False
@@ -313,20 +267,20 @@ def primera_hora():
                 return
 
             article_body = soup.select_one('div.ArticleContent > main')
-            if article_body == None:
+            if article_body is None:
                 opinion = True
                 article_body = soup
 
             # Retrieve title
             bs4_title = article_body.select_one('h1.ArticleHeadline_head')
             title = ''
-            if bs4_title != None:
+            if bs4_title is not None:
                 title = bs4_title.text.strip()
             else:
                 opinion = True
                 article_body = soup
                 bs4_title = article_body.select_one('h1.ArticleHeadline_head')
-                if bs4_title != None:
+                if bs4_title is not None:
                     title = bs4_title.text.strip()
                 else:
                     return
@@ -334,19 +288,19 @@ def primera_hora():
             # Retrieve subtitle
             bs4_subtitle = article_body.select_one('h2.ArticleHeadline_subhead')
             subtitle = ''
-            if bs4_subtitle != None:
+            if bs4_subtitle is not None:
                 subtitle = bs4_subtitle.text.strip()
 
             # Retrieve image
             if opinion:
                 bs4_image = soup.select_one('picture.AuthorBio__image > img.ResponsiveImage__img')
                 image_url = ''
-                if bs4_image != None:
+                if bs4_image is not None:
                     image_url = bs4_image['src']
             else:
                 bs4_image = article_body.select_one('figure.ArticlePhotoMain > picture > img.ResponsiveImage__img')
                 image_url = ''
-                if bs4_image != None:
+                if bs4_image is not None:
                     image_url = bs4_image['src']
 
                 # It is assumed that article otherwise has video
@@ -376,7 +330,7 @@ def primera_hora():
 
     response = retrieve_site('https://www.primerahora.com/arcio/news-sitemap/')
 
-    if response != None and response.ok:
+    if response is not None and response.ok:
         articles = xmltodict.parse(response.text)['urlset']['url']
         if len(articles) > MAX_ARTICLES:
             articles = articles[0:MAX_ARTICLES]
@@ -393,7 +347,11 @@ def primera_hora():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return format(output)
+        for el in output:
+            key = el['url'].strip().lower()
+            cache.put(key, el)
+
+        return output
 
     else:
         return None
@@ -416,18 +374,15 @@ def metropr():
         #  news_language = article['n:news']['n:publication']['n:language']
         #  keywords = article['n:news']['n:keywords'].split(',')
 
-        cache = retrieve_cache("metropr", 0)
-        for item in cache:
-            # If urls match, the article must be the same, so return cached article
-            if url.lower().strip() == item['url'].lower().strip():
-                del item["last_reset"]
-                output.append(item)
-                return
+        in_cache = cache.get(url.lower().strip())
+        if in_cache is not None:
+            output.append(in_cache)
+            return
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
 
-        if response != None and response.ok:
+        if response is not None and response.ok:
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
             article_body = soup.select_one('article.main-article')
@@ -435,19 +390,19 @@ def metropr():
             # Retrieve title
             bs4_title = article_body.select_one('header.article-header > h1.article-title')
             title = ''
-            if bs4_title != None:
+            if bs4_title is not None:
                 title = bs4_title.text.strip()
 
             # Retrieve subtitle
             bs4_subtitle = article_body.select_one('header.article-header > h2.excerpt')
             subtitle = ''
-            if bs4_subtitle != None:
+            if bs4_subtitle is not None:
                 subtitle = bs4_subtitle.text.strip()
 
             # Retrieve image
             bs4_image = article_body.select_one('img[data-backmedia="true"]')
             image_url = ''
-            if bs4_image != None:
+            if bs4_image is not None:
                 image_url = bs4_image['src']
 
             # Retrieve article content
@@ -475,7 +430,7 @@ def metropr():
 
     response = retrieve_site('https://www.metro.pr/pr/sitemap/news-sitemap.xml')
 
-    if response != None and response.ok:
+    if response is not None and response.ok:
         articles = xmltodict.parse(response.text)['urlset']['url']
         if len(articles) > MAX_ARTICLES:
             articles = articles[0:MAX_ARTICLES]
@@ -492,7 +447,11 @@ def metropr():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return format(output)
+        for el in output:
+            key = el['url'].strip().lower()
+            cache.put(key, el)
+
+        return output
 
     else:
         return None
@@ -509,24 +468,21 @@ def claridad():
         #  changefreq = article['changefreq']
         #  priority = article['priority']
 
-        cache = retrieve_cache("claridad", 0)
-        for item in cache:
-            # If urls match, the article must be the same, so return cached article
-            if url.lower().strip() == item['url'].lower().strip():
-                del item["last_reset"]
-                output.append(item)
-                return
+        in_cache = cache.get(url.lower().strip())
+        if in_cache is not None:
+            output.append(in_cache)
+            return
 
         # Retrieve article's url to extract titles, image, and content
         response = retrieve_site(url)
 
-        if response != None and response.ok:
+        if response is not None and response.ok:
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
             # Retrieve title
             bs4_title = soup.select_one('header.entry-header > h1')
             title = ''
-            if bs4_title != None:
+            if bs4_title is not None:
                 title = bs4_title.text.strip()
 
             # There is no subtitle
@@ -535,7 +491,7 @@ def claridad():
             # Retrieve image
             bs4_image = soup.select_one('main.site-main > article.post > div > img')
             image_url = ''
-            if bs4_image != None:
+            if bs4_image is not None:
                 image_url = bs4_image['src']
             else:
                 return
@@ -571,7 +527,7 @@ def claridad():
 
     response = retrieve_site(f'https://www.claridadpuertorico.com/sitemap-pt-post-{year}-{month}.xml')
 
-    if response != None and response.ok:
+    if response is not None and response.ok:
         articles = xmltodict.parse(response.text)['urlset']['url']
         if len(articles) > MAX_ARTICLES:
             articles = articles[0:MAX_ARTICLES]
@@ -588,7 +544,11 @@ def claridad():
                 futures = executor.map(process_article, articles)
                 concurrent.futures.wait(list(filter(None, futures)))
 
-        return format(output)
+        for el in output:
+            key = el['url'].strip().lower()
+            cache.put(key, el)
+
+        return output
 
     else:
         return None

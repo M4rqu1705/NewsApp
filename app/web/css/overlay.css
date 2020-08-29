@@ -3,7 +3,10 @@
   display: none;
   width: 100vw;
   height: 100vh;
-  top: 0; left: 0; right: 0;  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #00000088;
   z-index: 2;
 
@@ -12,60 +15,60 @@
 }
 
 #overlay__news-article {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: var(--article-width);
-    height: var(--article-height);
-    background-color: var(--overlay-background);
-    font-size: var(--overlay-font-size);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: var(--article-width);
+  height: var(--article-height);
+  background-color: var(--overlay-background);
+  font-size: var(--overlay-font-size);
 
-    border-radius: var(--border-radius);
-    line-height: calc(var(--overlay-font-size) * 1.4);
+  border-radius: var(--border-radius);
+  line-height: calc(var(--overlay-font-size) * 1.4);
 
-    margin: var(--overlay-margin);
-    padding: var(--overlay-padding);
-    padding-top: 2rem;
-    padding-bottom: 10rem;
+  margin: var(--overlay-margin);
+  padding: var(--overlay-padding);
+  padding-top: 2rem;
+  padding-bottom: 10rem;
 }
 
 #overlay__news-article__title {
-    font-size: var(--overlay-title-font-size);
-    margin: 0;
-    padding: 0;
-    margin-bottom: 1rem;
-    line-height: calc(var(--overlay-title-font-size) * 1.4);
+  font-size: var(--overlay-title-font-size);
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1rem;
+  line-height: calc(var(--overlay-title-font-size) * 1.4);
 
 }
 
 #overlay__news-article__subtitle {
-    font-size: var(--overlay-subtitle-font-size);
-    margin: 0;
-    padding: 0;
-    margin-bottom: 2rem;
-    line-height: calc(var(--overlay-subtitle-font-size) * 1.4);
+  font-size: var(--overlay-subtitle-font-size);
+  margin: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+  line-height: calc(var(--overlay-subtitle-font-size) * 1.4);
 
 }
 
 #overlay__news-article__image {
-    max-width: 75%;
-    position: relative;
-    left: 12.5%;
-    font-size: 0.75rem;
+  max-width: 75%;
+  position: relative;
+  left: 12.5%;
+  font-size: 0.75rem;
 }
 
 #overlay__news-article__date {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #overlay__news-article__close-button {
-    position: fixed;
-    top:5%;
-    right: 7.5%;
-    padding: 0;
-    margin: 0;
-    margin-bottom: 2rem;
-    font-size: var(--close-button-size);
+  position: fixed;
+  top: 5%;
+  right: 7.5%;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2rem;
+  font-size: var(--close-button-size);
 }
 
 
@@ -85,6 +88,11 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
